@@ -7,26 +7,26 @@
 
 import SwiftUI
 
-typealias Candidates = Set<String>
+typealias Candidates = Set<Character>
 
-let allCandidates = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+let allCandidates: [Character] = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 enum CellValue {
     case empty(Candidates)
-    case given(String)
-    case solved(String)
+    case given(Character)
+    case solved(Character)
 }
 
 class Cell {
     let row: Int
     let col: Int
     let box: Int
-    let value: CellValue
+    var value: CellValue
     
     init(row: Int, col: Int, value: CellValue) {
         self.row = row
         self.col = col
-        self.box = (row / 3) * 3 + (col / 3)
+        self.box = (row - 1) / 3 * 3 + ((col - 1) / 3) + 1
         self.value = value
     }
 }
@@ -34,11 +34,12 @@ class Cell {
 @Observable
 class Puzzle {
     let cells: [Cell]
+    var selectedCell: Cell?
     
     init() {
         var cells: [Cell] = [];
-        for row in (1..<10) {
-            for col in (1..<10) {
+        for row in (1...9) {
+            for col in (1...9) {
                 cells.append(Cell(row: row, col: col, value: .empty(Set(allCandidates))))
             }
         }
@@ -47,18 +48,19 @@ class Puzzle {
     
     init(from puzzle: String) {
         var cells: [Cell] = [];
-        for (row, line) in puzzle.split(separator: " ").enumerated() {
-            for (col, char) in line.enumerated() {
-                switch char {
-                    case let c where ("1"..."9").contains(c):
-                    cells.append(Cell(row: row + 1, col: col + 1, value: .given(String(c))))
-                default:
-                    cells.append(Cell(row: row + 1, col: col + 1, value: .empty(Set(allCandidates))))
-                }
-                
+        for row in (1...9) {
+            for col in (1...9) {
+                cells.append(Cell(row: row, col: col, value: .empty(Set(allCandidates))))
             }
         }
         self.cells = cells
+        for (row, line) in puzzle.split(separator: " ").enumerated() {
+            for (col, char) in line.enumerated() {
+                if (allCandidates.contains(char)) {
+                    self.setClue(row + 1, col + 1, char)
+                }
+            }
+        }
     }
     
     init(cells: [Cell]) {
@@ -67,5 +69,10 @@ class Puzzle {
     
     func getCell(_ row: Int, _ col: Int) -> Cell? {
         return self.cells.first { $0.row == row && $0.col == col }
+    }
+    
+    func setClue(_ row: Int, _ col: Int, _ clue: Character) {
+        guard let cell = self.getCell(row, col) else { return }
+        cell.value = .given(clue)
     }
 }

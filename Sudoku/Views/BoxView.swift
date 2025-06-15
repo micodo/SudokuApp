@@ -11,12 +11,12 @@ struct BoxView: View {
     let box: Int
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(1..<4) { x in
+            ForEach(0..<3) { r in
                 HStack(spacing: 0) {
-                    ForEach(1..<4) { y in
-                        let row = (box - 1) / 3 * 3 + x
-                        let col = (box - 1) % 3 * 3 + y
-                        CellView(row: row, col: col)
+                    ForEach(0..<3) { c in
+                        let row = ((box - 1) / 3) * 3 + r + 1
+                        let col = ((box - 1) % 3) * 3 + c + 1
+                        CellView(row: row, col: col, box: box)
                     }
                 }
             }
@@ -28,6 +28,6 @@ struct BoxView: View {
 
 #Preview {
     let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
-    BoxView(box: 2)
+    BoxView(box: 0)
         .environment(Puzzle(from: puzzle))
 }

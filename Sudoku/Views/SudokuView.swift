@@ -10,10 +10,10 @@ import SwiftUI
 struct SudokuView: View {
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(1..<4) { x in
+            ForEach(0..<3) { r in
                 HStack(spacing: 0) {
-                    ForEach(1..<4) { y in
-                        BoxView(box: 3 * (x - 1) + y)
+                    ForEach(0..<3) { c in
+                        BoxView(box: 3 * r + c + 1)
                     }
                 }
             }
@@ -23,11 +23,6 @@ struct SudokuView: View {
         .padding()
     }
 }
-
-func boxIndex(x: Int, y: Int) -> Int {
-    return (x - 1) * 3 + y
-}
-
 
 #Preview {
     let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";

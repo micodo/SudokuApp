@@ -18,7 +18,7 @@ struct CellCandidatesView: View {
                             .fill(.clear)
                             .aspectRatio(1.0, contentMode: .fit)
                             .overlay {
-                                Text(allCandidates[i])
+                                Text(String(allCandidates[i]))
                                     .font(.system(size: 9))
                                     .foregroundColor(.secondary)
                             }
@@ -35,7 +35,7 @@ struct CellCandidatesView: View {
                             .fill(.clear)
                             .aspectRatio(1.0, contentMode: .fit)
                             .overlay {
-                                Text(allCandidates[i])
+                                Text(String(allCandidates[i]))
                                     .font(.system(size: 9))
                                     .foregroundColor(.secondary)
                             }
@@ -52,7 +52,7 @@ struct CellCandidatesView: View {
                             .fill(.clear)
                             .aspectRatio(1.0, contentMode: .fit)
                             .overlay {
-                                Text(allCandidates[i])
+                                Text(String(allCandidates[i]))
                                     .font(.system(size: 9))
                                     .foregroundColor(.secondary)
                             }
