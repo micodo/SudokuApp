@@ -27,7 +27,8 @@ struct SudokuView: View {
              }
         }
         .aspectRatio(1.0, contentMode: .fit)
-        .border(Color.black, width: 2 )
+        .border(Color.primary, width: 2 )
+        .padding()
     }
 }
 

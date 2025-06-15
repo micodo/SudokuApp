@@ -26,6 +26,11 @@ struct BoxView: View {
                 CellView()
             }
         }
-        .border(Color.black, width: 1 )
+        .border(Color.primary, width: 1 )
     }
+}
+
+
+#Preview {
+    BoxView()
 }
