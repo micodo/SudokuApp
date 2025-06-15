@@ -23,22 +23,49 @@ class Cell {
     let box: Int
     let value: CellValue
     
-    init(row: Int, col: Int, box: Int, value: CellValue) {
+    init(row: Int, col: Int, value: CellValue) {
         self.row = row
         self.col = col
-        self.box = box
+        self.box = (row / 3) * 3 + (col / 3)
         self.value = value
     }
 }
 
 @Observable
 class Puzzle {
-    let cells: [[Cell]]
+    let cells: [Cell]
     
     init() {
-        self.cells = Array(repeating: Array(repeating: .init(row: 1, col: 1, box: 1, value: .given("7")), count: 9), count: 9)
-    }
-    init(cells: [[Cell]]) {
+        var cells: [Cell] = [];
+        for row in (1..<10) {
+            for col in (1..<10) {
+                cells.append(Cell(row: row, col: col, value: .empty(allCandidates)))
+            }
+        }
         self.cells = cells
+    }
+    
+    init(from puzzle: String) {
+        var cells: [Cell] = [];
+        for (row, line) in puzzle.split(separator: " ").enumerated() {
+            for (col, char) in line.enumerated() {
+                switch char {
+                    case let c where ("1"..."9").contains(c):
+                    cells.append(Cell(row: row + 1, col: col + 1, value: .given(String(c))))
+                default:
+                    cells.append(Cell(row: row + 1, col: col + 1, value: .empty(allCandidates)))
+                }
+                
+            }
+        }
+        self.cells = cells
+    }
+    
+    init(cells: [Cell]) {
+        self.cells = cells
+    }
+    
+    func getCell(_ row: Int, _ col: Int) -> Cell? {
+        return self.cells.first { $0.row == row && $0.col == col }
     }
 }

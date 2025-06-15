@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var puzzle = Puzzle()
     var body: some View {
         SudokuView()
         .padding()
-        .environment(puzzle)
     }
 }
 
 #Preview {
+    let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
     ContentView()
+        .environment(Puzzle(from: puzzle))
 }

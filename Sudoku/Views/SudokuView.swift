@@ -13,7 +13,7 @@ struct SudokuView: View {
             ForEach(1..<4) { x in
                 HStack(spacing: 0) {
                     ForEach(1..<4) { y in
-                        BoxView(index: boxIndex(x: x, y: y))
+                        BoxView(box: 3 * (x - 1) + y)
                     }
                 }
             }
@@ -28,7 +28,9 @@ func boxIndex(x: Int, y: Int) -> Int {
     return (x - 1) * 3 + y
 }
 
+
 #Preview {
+    let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
     SudokuView()
-        .environment(Puzzle())
+        .environment(Puzzle(from: puzzle))
 }

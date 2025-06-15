@@ -9,16 +9,13 @@ import SwiftUI
 struct CellView: View {
     let row: Int
     let col: Int
-    let box: Int
     @Environment(Puzzle.self) var puzzle
     var body: some View {
         Rectangle()
             .foregroundColor(.clear)
             .aspectRatio(1.0, contentMode: .fit)
             .overlay() {
-                if let cell = puzzle.cells.flatMap({$0}).first(where: {
-                    $0.row == row && $0.col == col && $0.box == box
-                }) {
+                if let cell = puzzle.getCell(row, col) {
                     switch cell.value {
                         case .empty(let candidates):
                             CellCandidatesView(candidates: candidates)
@@ -40,6 +37,7 @@ struct CellView: View {
 }
 
 #Preview {
-    CellView(row: 1, col: 1, box: 1)
-        .environment(Puzzle())
+    let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
+    CellView(row: 1, col: 2)
+        .environment(Puzzle(from: puzzle))
 }

@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct BoxView: View {
-    let index: Int
+    let box: Int
     var body: some View {
         VStack(spacing: 0) {
             ForEach(1..<4) { x in
                 HStack(spacing: 0) {
                     ForEach(1..<4) { y in
-                        CellView(row: x, col: y, box: index)
+                        let row = (box - 1) / 3 * 3 + x
+                        let col = (box - 1) % 3 * 3 + y
+                        CellView(row: row, col: col)
                     }
                 }
             }
@@ -25,6 +27,7 @@ struct BoxView: View {
 
 
 #Preview {
-    BoxView(index: 1)
-        .environment(Puzzle())
+    let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
+    BoxView(box: 1)
+        .environment(Puzzle(from: puzzle))
 }
