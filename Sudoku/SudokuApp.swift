@@ -8,8 +8,8 @@
 import SwiftUI
 
 var colors: [String: Color] = [
-    "selectedCell": Color(red: 0.75, green: 1, blue: 0.75),
-    "selectedGroup": Color(red: 0.9, green: 1, blue: 0.9),
+    "selectedCell": Color(red: 1.0, green: 0.9, blue: 0.7),
+    "selectedGroup": Color(red: 1.0, green: 0.95, blue: 0.9),
 ]
 
 @main

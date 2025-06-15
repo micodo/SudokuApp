@@ -74,5 +74,14 @@ class Puzzle {
     func setClue(_ row: Int, _ col: Int, _ clue: Character) {
         guard let cell = self.getCell(row, col) else { return }
         cell.value = .given(clue)
+        self.cells
+            .filter { $0.row == row || $0.col == col || $0.box == cell.box }
+            .forEach { switch $0.value {
+            case .empty(var candidates):
+                candidates.remove(clue)
+                $0.value = .empty(candidates)
+            default:
+                break
+            }}
     }
 }

@@ -24,7 +24,9 @@ struct CellCandidatesView: View {
                             }
                     }
                     else {
-                        EmptyView()
+                        Rectangle()
+                            .fill(.clear)
+                            .aspectRatio(1.0, contentMode: .fit)
                     }
                 }
             }
@@ -41,7 +43,9 @@ struct CellCandidatesView: View {
                             }
                    }
                     else {
-                        EmptyView()
+                        Rectangle()
+                            .fill(.clear)
+                            .aspectRatio(1.0, contentMode: .fit)
                     }
                 }
             }
@@ -58,7 +62,9 @@ struct CellCandidatesView: View {
                             }
                   }
                     else {
-                        EmptyView()
+                        Rectangle()
+                            .fill(.clear)
+                            .aspectRatio(1.0, contentMode: .fit)
                     }
                 }
             }
