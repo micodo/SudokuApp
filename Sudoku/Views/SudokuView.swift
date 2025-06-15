@@ -10,21 +10,13 @@ import SwiftUI
 struct SudokuView: View {
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                BoxView()
-                BoxView()
-                BoxView()
+            ForEach(1..<4) { x in
+                HStack(spacing: 0) {
+                    ForEach(1..<4) { y in
+                        BoxView(index: boxIndex(x: x, y: y))
+                    }
+                }
             }
-            HStack(spacing: 0) {
-                BoxView()
-                BoxView()
-                BoxView()
-             }
-            HStack(spacing: 0) {
-                BoxView()
-                BoxView()
-                BoxView()
-             }
         }
         .aspectRatio(1.0, contentMode: .fit)
         .border(Color.primary, width: 2 )
@@ -32,6 +24,11 @@ struct SudokuView: View {
     }
 }
 
+func boxIndex(x: Int, y: Int) -> Int {
+    return (x - 1) * 3 + y
+}
+
 #Preview {
     SudokuView()
+        .environment(Puzzle())
 }

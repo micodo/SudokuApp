@@ -8,22 +8,15 @@
 import SwiftUI
 
 struct BoxView: View {
+    let index: Int
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                CellView()
-                CellView()
-                CellView()
-            }
-            HStack(spacing: 0) {
-                CellView()
-                CellView()
-                CellView()
-            }
-            HStack(spacing: 0) {
-                CellView()
-                CellView()
-                CellView()
+            ForEach(1..<4) { x in
+                HStack(spacing: 0) {
+                    ForEach(1..<4) { y in
+                        CellView(row: x, col: y, box: index)
+                    }
+                }
             }
         }
         .border(Color.primary, width: 1 )
@@ -32,5 +25,6 @@ struct BoxView: View {
 
 
 #Preview {
-    BoxView()
+    BoxView(index: 1)
+        .environment(Puzzle())
 }
