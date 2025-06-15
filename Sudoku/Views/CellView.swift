@@ -31,13 +31,12 @@ struct CellView: View {
                         .font(.largeTitle)
                 }
             }
-            .padding(0.5)
             .border(Color.primary, width: 0.5)
     }
 }
 
 #Preview {
     let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
-    CellView(row: 1, col: 2)
+    CellView(row: 1, col: 1)
         .environment(Puzzle(from: puzzle))
 }

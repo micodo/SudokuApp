@@ -9,7 +9,7 @@ import SwiftUI
 
 typealias Candidates = Set<String>
 
-let allCandidates: Candidates = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+let allCandidates = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 enum CellValue {
     case empty(Candidates)
@@ -39,7 +39,7 @@ class Puzzle {
         var cells: [Cell] = [];
         for row in (1..<10) {
             for col in (1..<10) {
-                cells.append(Cell(row: row, col: col, value: .empty(allCandidates)))
+                cells.append(Cell(row: row, col: col, value: .empty(Set(allCandidates))))
             }
         }
         self.cells = cells
@@ -53,7 +53,7 @@ class Puzzle {
                     case let c where ("1"..."9").contains(c):
                     cells.append(Cell(row: row + 1, col: col + 1, value: .given(String(c))))
                 default:
-                    cells.append(Cell(row: row + 1, col: col + 1, value: .empty(allCandidates)))
+                    cells.append(Cell(row: row + 1, col: col + 1, value: .empty(Set(allCandidates))))
                 }
                 
             }

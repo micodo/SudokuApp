@@ -28,6 +28,6 @@ struct BoxView: View {
 
 #Preview {
     let puzzle = "090008000 000000300 470000000 000042000 600000009 001003000 000700095 003000000 002000008";
-    BoxView(box: 1)
+    BoxView(box: 2)
         .environment(Puzzle(from: puzzle))
 }
